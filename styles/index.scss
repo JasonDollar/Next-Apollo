@@ -12,7 +12,7 @@ $gray-60: #868e96 !default;
 $gray-70: #495057 !default;
 $gray-80: #343a40 !default;
 $gray-90: #212529 !default;
-  
+
 $black: #000 !default;
 $black-navigation: #141618;
 
@@ -32,7 +32,6 @@ $cyan:    #17a2b8 !default;
 
 body {
   -webkit-font-smoothing: antialiased;
-  background-color: $white;
   font-family: sans-serif;
   margin: 0;
   padding: 0;
@@ -47,12 +46,12 @@ html {
 #__next {
   height: 100%;
 }
-  
+
 // Modifiers START
 .white {
   color: $white;
 }
-  
+
 .black {
   color: $black;
 }
@@ -76,7 +75,7 @@ html {
 .bg-green-2 {
   background-color: $green !important;
 }
-  
+
 .br-2 {
   border-radius: .25rem;
 }
@@ -97,7 +96,7 @@ html {
   box-shadow: 0 5px 30px -15px rgba(0,0,0,.2);
   border-radius: 5px;
 }
-  
+
 .no-border {
   border: none;
 }
@@ -110,11 +109,11 @@ html {
   padding: 0 11px 0.25em 11px;
   line-height: 1.6;
 }
-  
+
 // Modifiers END
 
 // Shared END
-  
+
 .section-title {
   color: $gray-80;
 }
@@ -123,7 +122,7 @@ html {
   flex-basis: 100%;
   height: 0;
 }
-  
+
 .grow {
   -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -139,7 +138,7 @@ html {
     cursor: pointer;
   }
 }
-  
+
 // General Components START
 
 .card:hover {
@@ -156,7 +155,7 @@ html {
     cursor: pointer;
   }
 }
-  
+
 .avatar-container {
   display: flex;
   flex-direction: row;
@@ -172,7 +171,7 @@ html {
     font-size: 12px;
   }
 }
-  
+
 .btn-main {
   padding: 16px 24px;
   color: white;
@@ -183,7 +182,7 @@ html {
     color: white;
   }
 }
-  
+
 .navbar {
   // height: 60px;
   margin: 0 auto;
@@ -201,11 +200,11 @@ html {
     background-color: $black-navigation;
   }
 }
-  
+
 // General Components END
 
 // Components START
-  
+
 .higlight-post {
   .content-container {
     max-height: 100px;
@@ -214,7 +213,7 @@ html {
     text-overflow: ellipsis;
   }
 }
-  
+
 .portfolio-app {
   height: 100%;
 }
@@ -222,14 +221,14 @@ html {
 .page-wrapper {
   padding-bottom: 60px;
 }
-  
+
 #sticky-footer {
   background-color: #141618;
   // position: absolute;
   // bottom: 0;
   // left: 0;
 }
-  
+
 .fj-hero {
   padding: 80px 40px;
   display: flex;
@@ -289,7 +288,7 @@ html {
     }
   }
 }
-  
+
 .fj-category-container {
   .fj-category {
     display: flex;
@@ -330,7 +329,7 @@ html {
     }
   }
 }
-  
+
 .fj-topic-list {
   table {
     font-size: 18px;
@@ -361,7 +360,7 @@ html {
     }
   }
 }
-  
+
 .fj-post-list {
 
   .topic-parent {
@@ -510,7 +509,7 @@ html {
     }
   }
 }
-  
+
 .posts-bottom {
   display: flex;
   width: 100%;
@@ -519,8 +518,8 @@ html {
     align-self: center;
   }
 }
-  
-  
+
+
 .reply-controls {
   color: #fff;
   height: 0;
@@ -684,7 +683,7 @@ html {
     color: #00aeff;
   }
 }
-  
+
 .bwm-form {
   form {
     margin-bottom: 10px;
@@ -728,9 +727,9 @@ html {
     letter-spacing: 1px;
   }
 }
-  
+
 // Components END
-  
+
 .portfolio-detail {
     // Detail Page START
   padding-top: 20px;

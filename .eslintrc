@@ -5,6 +5,7 @@
       "jest": true,
       "node": true
   },
+  "root": true,
   "extends": [
    "airbnb",
    "plugin:react/recommended"

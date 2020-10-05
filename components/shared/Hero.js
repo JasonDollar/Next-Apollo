@@ -1,7 +1,7 @@
 
 
 
-const Hero = () =>
+const Hero = () => (
   <section className="fj-hero">
     <div className="fj-hero-wrapper row">
       <div className="hero-left col-md-6">
@@ -16,11 +16,13 @@ const Hero = () =>
           <a className="grow hero-link">
             <img
               className="hero-image"
-              src="https://i.udemycdn.com/course/750x422/1652608_662b_8.jpg"></img>
+              src="https://i.udemycdn.com/course/750x422/1652608_662b_8.jpg"
+            />
           </a>
         </div>
       </div>
     </div>
   </section>
+)
 
-export default Hero;
+export default Hero

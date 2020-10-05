@@ -21,6 +21,7 @@ const Posts = () => (
                       <img
                         className="avatar subtle-shadow"
                         src="https://i.imgur.com/cVDadwb.png"
+                        alt="avatar"
                       />
                     </div>
                   </div>

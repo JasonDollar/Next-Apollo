@@ -15,7 +15,7 @@ const Portfolios = props => (
       <div className="px-2">
         <div className="pt-5 pb-4">
           <h1>Portfolios</h1>
-        </div>
+        </div> 
       </div>
     </section>
     <section className="pb-5">

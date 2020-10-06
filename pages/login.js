@@ -13,7 +13,7 @@ const Login = () => (
       <div className="row">
         <div className="col-md-5 mx-auto">
           <h1 className="page-title">Login</h1>
-          <form>
+          <form> 
             <div className="form-group">
               <label htmlFor="email">Email</label>
               <input

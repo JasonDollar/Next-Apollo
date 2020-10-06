@@ -1,16 +1,29 @@
 import React from 'react'
+import axios from 'axios'
 
+const fetchPortfolios = () => {
+  const query = `
+    query Portfolios {
+      portfolios {
+        _id,
+        title,
+        company,
+        companyWebsite
+        location
+        jobTitle
+        description
+        startDate
+        endDate
+      }
+    }`
+  return axios.post('http://localhost:3000/graphql', { query })
+    .then(({ data: graph }) => graph.data)
+    .then(data => data.portfolios)
+}
 
-const apiCall = () => new Promise((res, rej) => {
-  setTimeout(() => {
-    res({ testingData: 'Just some testing Data' })
-  }, 200)
-})
-
-
-const Portfolios = props => (
+const Portfolios = ({ portfolios }) => (
   <>
-    {props.testingData}
+    {console.log(portfolios)}
     <section className="section-title">
       <div className="px-2">
         <div className="pt-5 pb-4">
@@ -62,9 +75,8 @@ const Portfolios = props => (
 )
 
 Portfolios.getInitialProps = async () => {
-  console.log('GET INITIAL PROPS PORTFOLIOS')
-  const data = await apiCall()
-  return { ...data }
+  const portfolios = await fetchPortfolios()
+  return { portfolios }
 }
 
 

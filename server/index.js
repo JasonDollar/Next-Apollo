@@ -30,6 +30,7 @@ app.prepare().then(() => {
       type Mutation {
         createPortfolio(portfolio: PortfolioInput): Portfolio
         updatePortfolio(id: ID, input: PortfolioInput): Portfolio
+        deletePortfolio(id: ID): ID
       }
   `
 

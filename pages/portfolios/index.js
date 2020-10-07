@@ -83,6 +83,18 @@ const graphUpdatePortfolio = id => {
     .then(data => data.updatePortfolio)
 }
 
+const graphDeletePortfolio = id => {
+  const query = `
+    mutation DeletePortfolio {
+      deletePortfolio(id: "${id}")
+    }
+  `
+
+  return axios.post('http://localhost:3000/graphql', { query })
+    .then(({ data: graph }) => graph.data)
+    .then(data => data.deletePortfolio)
+}
+
 const Portfolios = ({ data }) => {
   const [portfolios, setPortfolios] = useState(() => data.portfolios)
 
@@ -96,6 +108,14 @@ const Portfolios = ({ data }) => {
     const index = portfolios.findIndex(p => p._id === id)
     const newPortfolios = portfolios.slice()
     newPortfolios[index] = updatedPortfolio
+    setPortfolios(newPortfolios)
+  }
+
+  const deletePortfolio = async id => {
+    const deletedId = await graphDeletePortfolio(id)
+    const index = portfolios.findIndex(p => p._id === deletedId)
+    const newPortfolios = portfolios.slice()
+    newPortfolios.splice(index, 1)
     setPortfolios(newPortfolios)
   }
   
@@ -126,7 +146,17 @@ const Portfolios = ({ data }) => {
                   <PortfolioCard portfolio={item} />
                 </a>
               </Link>
-              <button className="btn btn-warning" onClick={() => updatePortfolio(item._id)}>Update</button>
+              <button 
+                className="btn btn-warning"
+                onClick={() => updatePortfolio(item._id)}
+              >Update
+              </button>
+              <button
+                onClick={() => deletePortfolio(item._id)}
+                className="btn btn-danger"
+              >
+                Delete Portfolio
+              </button>
             </div>
           ))}
         </div>

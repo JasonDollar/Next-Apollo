@@ -1,5 +1,7 @@
 import React from 'react'
-import App from 'next/app'
+// import App from 'next/app'
+import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client'
+import 'isomorphic-unfetch'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '../styles/index.scss'
@@ -7,19 +9,25 @@ import '../styles/index.scss'
 import Navbar from '../components/shared/Navbar'
 import Hero from '../components/shared/Hero'
 
+const client = new ApolloClient({
+  uri: 'http://localhost:3000/graphql',
+  cache: new InMemoryCache(),
+})
+
 const MyApp = ({ Component, pageProps }) => {
 
   const isHomePage = () => Component.name === 'Home'
 
   return (
-    <div className="portfolio-app">
-      <Navbar />
-      { isHomePage() && <Hero /> }
-      <div className="container">
-        <Component {...pageProps} />
-      </div>
-      {/* FOOTER STARTS */}
-      { isHomePage()
+    <ApolloProvider client={client}>
+      <div className="portfolio-app">
+        <Navbar />
+        { isHomePage() && <Hero /> }
+        <div className="container">
+          <Component {...pageProps} />
+        </div>
+        {/* FOOTER STARTS */}
+        { isHomePage()
         && (
         <footer id="sticky-footer" className="py-4 bg-black text-white-50 py-3">
           <div className="container text-center">
@@ -27,8 +35,9 @@ const MyApp = ({ Component, pageProps }) => {
           </div>
         </footer>
         )}
-      {/* FOOTER ENDS */}
-    </div>
+        {/* FOOTER ENDS */}
+      </div>
+    </ApolloProvider>
   )
 }
 

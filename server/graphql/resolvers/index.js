@@ -1,7 +1,7 @@
 const data = {
   portfolios: [
     {
-      _id: 'sad87da79',
+      _id: 'adsf32rfasrf23',
       title: 'Job in Netcentric',
       company: 'Netcentric',
       companyWebsite: 'www.google.com',
@@ -55,7 +55,7 @@ exports.portfolioMutations = {
   },
   updatePortfolio: (root, { id, input }) => {
     const index = data.portfolios.findIndex(item => item._id === id)
-    if (!index) return null
+    if (index < 0) return null
     const oldPortfolio = data.portfolios[index]
     const updatedPortfolio = {
       ...oldPortfolio,

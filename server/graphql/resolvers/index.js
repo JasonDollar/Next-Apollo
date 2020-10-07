@@ -43,5 +43,11 @@ exports.portfolioResolvers = {
     return portfolio
   },
   portfolios: () => data.portfolios,
-
+  createPortfolio: async ({ portfolio }) => {
+    const _id = await require('crypto').randomBytes(10).toString('hex')
+    const newPortfolio = { ...portfolio, _id }
+    
+    data.portfolios.push(newPortfolio)
+    return newPortfolio
+  },
 }

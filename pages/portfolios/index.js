@@ -1,58 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
+import { useLazyQuery, useMutation } from '@apollo/client'
+
+import { GET_PORTFOLIOS, CREATE_PORTFOLIO  } from '../../apollo/queries'
 
 import PortfolioCard from '../../components/portfolios/PortfolioCard'
 
-const fetchPortfolios = () => {
-  const query = `
-    query Portfolios {
-      portfolios {
-        _id,
-        title,
-        company,
-        companyWebsite
-        location
-        jobTitle
-        description
-        startDate
-        endDate
-      }
-    }`
-  return axios.post('http://localhost:3000/graphql', { query })
-    .then(({ data: graph }) => graph.data)
-    .then(data => data.portfolios)
-}
-
-const graphCreatePortfolio = () => {
-  // hardcoded data for testing
-  const query = `
-  mutation CreatePortfolio {
-    createPortfolio(portfolio: {
-      title: "New Job"
-      company: "New Company"
-      companyWebsite: "New Website"
-      location: "New Location"
-      jobTitle: "New Job Title"
-      description: "New Desc"
-      startDate: "12/12/2012"
-      endDate: "14/11/2013"
-    }) {
-      _id,
-      title,
-      company,
-      companyWebsite
-      location
-      jobTitle
-      description
-      startDate
-      endDate
-    }
-  }`
-  return axios.post('http://localhost:3000/graphql', { query })
-    .then(({ data: graph }) => graph.data)
-    .then(data => data.createPortfolio)
-}
 
 const graphUpdatePortfolio = id => {
   const query = `
@@ -95,13 +49,24 @@ const graphDeletePortfolio = id => {
     .then(data => data.deletePortfolio)
 }
 
-const Portfolios = ({ data }) => {
-  const [portfolios, setPortfolios] = useState(() => data.portfolios)
+const Portfolios = () => {
+  const [portfolios, setPortfolios] = useState([])
+  const [getPortfolios, { loading, error, data }] = useLazyQuery(GET_PORTFOLIOS)
+  const [createPortfolio, {data: dataC}] = useMutation(CREATE_PORTFOLIO)
+  console.log(dataC)
 
-  const createPortfolio = async () => {
-    const newPortfolio = await graphCreatePortfolio()
-    setPortfolios([...portfolios, newPortfolio])
+  useEffect(() => {
+    getPortfolios()
+  }, [])
+
+  if (data?.portfolios.length > 0 && portfolios.length === 0) {
+    setPortfolios(data.portfolios)
   }
+
+  if (loading) return <div>Loading</div>
+  if (error) return <div>Error</div>
+
+
 
   const updatePortfolio = async id => {
     const updatedPortfolio = await graphUpdatePortfolio(id)
@@ -163,12 +128,6 @@ const Portfolios = ({ data }) => {
       </section>
     </>
   )
-}
-
-Portfolios.getInitialProps = async () => {
-  const portfolios = await fetchPortfolios()
-
-  return { data: { portfolios } }
 }
 
 

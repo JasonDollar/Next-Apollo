@@ -5,19 +5,21 @@ import { GET_PORTFOLIO } from '../../apollo/queries'
 
 const PortfolioDetail = ({ query }) => {
   const { loading, error, data } = useQuery(GET_PORTFOLIO, { variables: { id: query.id } })
-  console.log(loading)
+
   if (loading) return <div>Loading</div>
   if (error) return <div>Error</div>
+
+  const portfolio = data?.portfolio || {}
 
   return (
     <div className="portfolio-detail">
       <div className="container">
   
         <div className="jumbotron">
-          <h1 className="display-3">{data.portfolio.title}</h1>
-          <p className="lead">{data.portfolio.jobTitle}</p>
+          <h1 className="display-3">{portfolio.title}</h1>
+          <p className="lead">{portfolio.jobTitle}</p>
           <p>
-            <a className="btn btn-lg btn-success" href={data.portfolio.companyWebsite} role="button">
+            <a className="btn btn-lg btn-success" href={portfolio.companyWebsite} role="button">
               See Company
             </a>
           </p>
@@ -26,10 +28,10 @@ const PortfolioDetail = ({ query }) => {
         <div className="row marketing">
           <div className="col-lg-6">
             <h4 className="title">Location</h4>
-            <p className="text">{data.portfolio.location}</p>
+            <p className="text">{portfolio.location}</p>
   
             <h4 className="title">Start Date</h4>
-            <p className="text">{data.portfolio.startDate}</p>
+            <p className="text">{portfolio.startDate}</p>
           </div>
   
           <div className="col-lg-6">
@@ -38,12 +40,12 @@ const PortfolioDetail = ({ query }) => {
             <p className="text">44</p>
   
             <h4 className="title">End Date</h4>
-            <p className="text">{data.portfolio.endDate}</p>
+            <p className="text">{portfolio.endDate}</p>
           </div>
           <div className="col-md-12">
             <hr />
             <h4 className="title">Description</h4>
-            <p>{data.portfolio.description}</p>
+            <p>{portfolio.description}</p>
           </div>
         </div>
       </div>

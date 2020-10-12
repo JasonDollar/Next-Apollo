@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import Link from 'next/link'
-import { useLazyQuery, useMutation } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
+import { getDataFromTree } from '@apollo/react-ssr'
+import withApollo from '../../hoc/withApollo'
 
-import { GET_PORTFOLIOS, CREATE_PORTFOLIO  } from '../../apollo/queries'
+import { GET_PORTFOLIOS, CREATE_PORTFOLIO, GET_PORTFOLIO } from '../../apollo/queries'
 
 import PortfolioCard from '../../components/portfolios/PortfolioCard'
 
@@ -51,20 +53,24 @@ const graphDeletePortfolio = id => {
 
 const Portfolios = () => {
   const [portfolios, setPortfolios] = useState([])
-  const [getPortfolios, { loading, error, data }] = useLazyQuery(GET_PORTFOLIOS)
-  const [createPortfolio, {data: dataC}] = useMutation(CREATE_PORTFOLIO)
-  console.log(dataC)
+  const { loading, error, data } = useQuery(GET_PORTFOLIOS)
+  const [createPortfolio, { data: dataC }] = useMutation(CREATE_PORTFOLIO, {
+    update: (cache, { data: { createPortfolio } }) => {
+      console.log(createPortfolio)
+      const { portfolios } = cache.readQuery({ query: GET_PORTFOLIOS })
+      console.log(portfolios)
+      cache.writeQuery({ query: GET_PORTFOLIOS, data: { portfolios: [...portfolios, createPortfolio] } })
+    },
+  })
+  
 
-  useEffect(() => {
-    getPortfolios()
-  }, [])
 
-  if (data?.portfolios.length > 0 && portfolios.length === 0) {
+  if (data?.portfolios.length > 0 && (portfolios.length === 0 || data.portfolios.length !== portfolios.length)) {
     setPortfolios(data.portfolios)
   }
 
-  if (loading) return <div>Loading</div>
-  if (error) return <div>Error</div>
+  // if (loading) return <div>Loading</div>
+  // if (error) return <div>Error</div>
 
 
 
@@ -132,4 +138,4 @@ const Portfolios = () => {
 
 
 
-export default Portfolios
+export default withApollo(Portfolios, { getDataFromTree })

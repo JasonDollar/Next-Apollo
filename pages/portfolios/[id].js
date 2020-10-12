@@ -1,13 +1,15 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
+import { getDataFromTree } from '@apollo/react-ssr'
 import { GET_PORTFOLIO } from '../../apollo/queries'
+import withApollo from '../../hoc/withApollo'
 
 
 const PortfolioDetail = ({ query }) => {
   const { loading, error, data } = useQuery(GET_PORTFOLIO, { variables: { id: query.id } })
 
-  if (loading) return <div>Loading</div>
-  if (error) return <div>Error</div>
+  // if (loading) return <div>Loading</div>
+  // if (error) return <div>Error</div>
 
   const portfolio = data?.portfolio || {}
 
@@ -57,4 +59,4 @@ const PortfolioDetail = ({ query }) => {
 PortfolioDetail.getInitialProps = async ({ query }) => ({ query })
 
 
-export default PortfolioDetail
+export default withApollo(PortfolioDetail, { getDataFromTree })

@@ -59,4 +59,4 @@ const PortfolioDetail = ({ query }) => {
 PortfolioDetail.getInitialProps = async ({ query }) => ({ query })
 
 
-export default withApollo(PortfolioDetail, {getDataFromTree })
+export default withApollo(PortfolioDetail, { getDataFromTree })

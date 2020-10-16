@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { useQuery, useMutation } from '@apollo/client'
 import { getDataFromTree } from '@apollo/react-ssr'
 import withApollo from '../../hoc/withApollo'
 
@@ -9,7 +7,7 @@ import {
   useGetPortfolios,
   useUpdatePortfolio,
   useDeletePortfolio,
-  useCreatePortfolio 
+  useCreatePortfolio, 
 } from '../../apollo/actions'
 
 import PortfolioCard from '../../components/portfolios/PortfolioCard'
@@ -18,13 +16,13 @@ import PortfolioCard from '../../components/portfolios/PortfolioCard'
 
 const Portfolios = () => {
   const [portfolios, setPortfolios] = useState([])
-  const { data } = useGetPortfolios();
-  const [ updatePortfolio ] = useUpdatePortfolio();
-  const [ deletePortfolio ] = useDeletePortfolio();
-  const [ createPortfolio ] = useCreatePortfolio();
+  const { data } = useGetPortfolios()
+  const [updatePortfolio] = useUpdatePortfolio()
+  const [deletePortfolio] = useDeletePortfolio()
+  const [createPortfolio] = useCreatePortfolio()
   
 
-
+// eslint-disable-next-line no-use-before-define
   if (data?.portfolios.length > 0 && (portfolios.length === 0 || data.portfolios.length !== portfolios.length)) {
     setPortfolios(data.portfolios)
   }
@@ -60,11 +58,11 @@ const Portfolios = () => {
               </Link>
               <button 
                 className="btn btn-warning"
-                onClick={() => updatePortfolio({variables: {id: item._id}})}
+                onClick={() => updatePortfolio({ variables: { id: item._id } })}
               >Update
               </button>
               <button
-                onClick={() => deletePortfolio({variables: {id: item._id}})}
+                onClick={() => deletePortfolio({ variables: { id: item._id } })}
                 className="btn btn-danger"
               >
                 Delete Portfolio

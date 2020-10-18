@@ -15,18 +15,13 @@ import PortfolioCard from '../../components/portfolios/PortfolioCard'
 
 
 const Portfolios = () => {
-  const [portfolios, setPortfolios] = useState([])
+  // const [portfolios, setPortfolios] = useState([])
   const { data } = useGetPortfolios()
   const [updatePortfolio] = useUpdatePortfolio()
   const [deletePortfolio] = useDeletePortfolio()
   const [createPortfolio] = useCreatePortfolio()
-  
 
-// eslint-disable-next-line no-use-before-define
-  if (data?.portfolios.length > 0 && (portfolios.length === 0 || data.portfolios.length !== portfolios.length)) {
-    setPortfolios(data.portfolios)
-  }
-
+  const portfolios = data?.portfolios || []
 
   
   return (

@@ -16,7 +16,7 @@
   "dependencies": {
     "@apollo/client": "^3.2.2",
     "@apollo/react-ssr": "^4.0.0",
-    "axios": "^0.20.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "express": "^4.17.1",
     "express-graphql": "^0.11.0",
